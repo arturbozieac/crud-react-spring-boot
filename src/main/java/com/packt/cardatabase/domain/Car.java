@@ -13,15 +13,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "car")
 public class Car {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "owner")
+	@JoinColumn(name = "owner_id")
 	private Owner owner;
 	
 	@ManyToMany(mappedBy = "cars")
