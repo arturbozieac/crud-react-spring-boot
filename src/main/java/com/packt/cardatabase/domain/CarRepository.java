@@ -1,10 +1,9 @@
-package com.packt.cardatabase.car;
+package com.packt.cardatabase.domain;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-
-import com.packt.cardatabase.domain.Car;
 
 public interface CarRepository extends CrudRepository<Car, Long> {
 
@@ -12,6 +11,7 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 	List<Car> findByBrandOrderByYearAsc(String brand);
 
 	// Fetch cars by brand
+	 @Query("select c from Car c where c.brand = ?1")
 	List<Car> findByBrand(String brand);
 
 	// Fetch cars by color
