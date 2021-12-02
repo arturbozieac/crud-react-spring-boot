@@ -1,35 +1,28 @@
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import React, { useState } from "react";
 import "./App.css";
-import RestGithub from "./components/RestGithub";
+import AddItem from './components/AddItem';
 
 function App() {
-  const [data, setData] = useState([]);
-  const [keyword, setKeyword] = useState('');
 
+  const [items, setItems] = useState([]);
 
-  const fetchData = () => {
-      const url = `https://api.github.com/search/repositories?q=${keyword}`;
-      fetch(url)
-          .then(response => response.json())
-          .then(responseData => {
-              setData(responseData.items);
-          });
-  }
-  const handleChange = (e) => {
-      setKeyword(e.target.value);
+  const addItem = (item) => {
+    setItems([item, ...items])
   }
 
-  const tableRows = data.map((item, index) =>
-      <tr key={index}><td>{item.full_name}</td>
-          <td><a href={item.html_url}>{item.html_url}</a></td></tr>);
-
-      return (
-          <div className="App">
-              <input type="text" onChange={handleChange} />
-              <button onClick={fetchData} value={keyword} >fetch</button>
-              <table><tbody>{tableRows}</tbody></table>
-          </div>
-      );
+  return (
+    <div className="App">
+      <AppBar position="static" color="default">
+        <Toolbar>
+          <Typography varint="h6" color="inherited">Shopping List</Typography>
+        </Toolbar>
+      </AppBar>
+      <AddItem addItem = {addItem}/>
+    </div>
+  );
 }
 
 export default App;
