@@ -7,7 +7,7 @@ export default class WeatherApp extends Component {
     }
 
     componentDidMount() {
-        fetch('http://api.openweathermap.org/data/2.5/weather?q=London&units=Metric&APIkey=4c2d032aed195c169129f803cabf4691')
+        fetch('http://api.openweathermap.org/data/2.5/weather?q=London&units=Metric&APIkey=APIKEY')
             .then(response => response.json())
             .then(responseData => {
                 this.setState({
