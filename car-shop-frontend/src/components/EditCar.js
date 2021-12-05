@@ -32,7 +32,7 @@ const EditCar = (props) => {
 
   return (
     <div>
-      <Button onClick={handleClickOpen}>Edit</Button>
+      <Button color="primary" onClick={handleClickOpen}>Edit</Button>
       <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Edit car</DialogTitle>
           <DialogContent>

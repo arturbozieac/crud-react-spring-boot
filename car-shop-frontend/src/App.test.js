@@ -1,8 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import TestRenderer from 'react-test-renderer';
+import AddCar from './components/AddCar';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+it('renders a snapshot for AddCar', () => {
+  const tree = TestRenderer.create(<AddCar/>).toJSON();
+  expect(tree).toMatchSnapshot();
+ });
+
+ it('renders a snapshot for App', () => {
+  const tree = TestRenderer.create(<App/>).toJSON();
+  expect(tree).toMatchSnapshot();
+ });

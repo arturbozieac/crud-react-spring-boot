@@ -120,7 +120,7 @@ class Carlist extends Component {
             filterable: false,
             width: 100,
             accessor: '_links.self.href',
-            Cell: ({ value }) => (<Button
+            Cell: ({ value }) => (<Button color="secondary"
                 onClick={() => { this.onDelClick(value) }}>Delete</Button>)
         }]
 
