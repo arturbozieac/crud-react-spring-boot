@@ -10,8 +10,6 @@ import { CSVLink } from 'react-csv';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-
-
 class Carlist extends Component {
     constructor(props) {
         super(props);
@@ -19,7 +17,13 @@ class Carlist extends Component {
     }
 
     fetchCars = () => {
-        fetch(SERVER_URL + 'api/cars')
+        // Read the token from the session storage
+        // and include it to Authorization header
+        const token = sessionStorage.getItem("jwt");
+        fetch(SERVER_URL + 'api/cars',
+         {
+            headers: {'Authorization': token}
+        })
             .then((response) => response.json())
             .then((responseData) => {
                 this.setState({
@@ -35,11 +39,13 @@ class Carlist extends Component {
 
     // Add new car
     addCar(car) {
+        const token = sessionStorage.getItem("jwt");
         fetch(SERVER_URL + 'api/cars',
             {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': token
                 },
                 body: JSON.stringify(car)
             })
@@ -49,11 +55,13 @@ class Carlist extends Component {
 
     // Update car
     updateCar(car, link) {
+        const token = sessionStorage.getItem("jwt");
         fetch(link,
             {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': token
                 },
                 body: JSON.stringify(car)
             })
@@ -73,7 +81,10 @@ class Carlist extends Component {
     // Delete car
     onDelClick = (link) => {
         if (window.confirm('Are you sure to delete?')) {
-            fetch(link, { method: 'DELETE' })
+            const token = sessionStorage.getItem("jwt");
+            fetch(link, { 
+                headers: {'Authorization': token},
+                method: 'DELETE' })
                 .then(res => {
                     toast.success("Car deleted", {
                         position: toast.POSITION.BOTTOM_RIGHT
